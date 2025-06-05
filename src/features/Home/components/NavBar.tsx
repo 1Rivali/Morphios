@@ -1,11 +1,12 @@
 // src/components/NavBar.jsx
-import { logo } from "@/core/constants/assets";
-import { Box, HStack, Image, Text } from "@chakra-ui/react";
+import { icMenu, logo } from "@/core/constants/assets";
+import { Box, HStack, Image, Text, useBreakpointValue } from "@chakra-ui/react";
 
 export function NavBar() {
+  const isMobile = useBreakpointValue({ base: true, lg: false });
   return (
     <HStack
-      position="absolute"
+      position="sticky"
       top={0}
       left={0}
       width="100%"
@@ -14,16 +15,21 @@ export function NavBar() {
       justifyContent="space-between"
       background="transparent"
     >
-      <Box></Box>
-      <Image src={logo} height="60px" />
-      <Box></Box>
-      <HStack gap={6} color="white">
-        <Text cursor="pointer">Home</Text>
-        <Text cursor="pointer">The Origin</Text>
-        <Text cursor="pointer">Book a magician</Text>
-        <Text cursor="pointer">Our Pillars</Text>
-      </HStack>
-      <Box width="25vw" />
+      {!isMobile && <Box></Box>}
+      <Image src={logo} height={{ base: "40px", lg: "60px" }} />
+      {!isMobile && (
+        <>
+          <Box></Box>
+          <HStack gap={6} color="white">
+            <Text cursor="pointer">Home</Text>
+            <Text cursor="pointer">The Origin</Text>
+            <Text cursor="pointer">Book a magician</Text>
+            <Text cursor="pointer">Our Pillars</Text>
+          </HStack>
+          <Box width="25vw" />
+        </>
+      )}
+      {isMobile && <Image src={icMenu} />}
     </HStack>
   );
 }

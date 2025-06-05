@@ -47,19 +47,21 @@ const DoorsSection = () => {
           backgroundPosition={"center"}
         >
           <Door
+            to="/agency"
             icon={icAgency}
             title="The Agency"
             body="Performers of the unseen Experiences that don’t end when they’re over —
-                they echo."
+                  they echo."
           />
 
           <Door
+            to="/agency"
             icon={icProductionHouse}
             title="The Production House"
             body="Stories carved from silence. Cinematic reflections of memory, myth, and the moment."
           />
 
-          <Door icon={icLock} title="Closed For Now" isSoon />
+          <Door to="/agency" icon={icLock} title="Closed For Now" isSoon />
         </Flex>
       </Box>
     </MotionBox>

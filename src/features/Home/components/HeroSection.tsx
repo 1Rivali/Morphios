@@ -2,7 +2,6 @@ import { banner } from "@/core/constants/assets";
 import { Box } from "@chakra-ui/react";
 import { HeroOverlay } from "./HeroOverlay";
 import { HeroTextBlock } from "./HeroTextBlock";
-import { NavBar } from "./NavBar";
 
 export function HeroSection() {
   return (
@@ -16,7 +15,7 @@ export function HeroSection() {
       backgroundSize={"cover"}
       backgroundPosition={"center"}
     >
-      <NavBar />
+      {/* <NavBar /> */}
       <HeroOverlay />
       <HeroTextBlock />
     </Box>

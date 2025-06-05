@@ -3,7 +3,12 @@ import { Button, Image } from "@chakra-ui/react";
 
 interface MorphButtonProps {
   onClick?: () => void;
-  width?: string;
+  width?:
+    | string
+    | {
+        base: string;
+        lg: string;
+      };
   text: string;
 }
 

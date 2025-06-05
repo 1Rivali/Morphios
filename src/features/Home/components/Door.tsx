@@ -1,17 +1,21 @@
 import { doorFrame, soonDoor } from "@/core/constants/assets";
 import { AspectRatio, Box, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 interface DoorProps {
   title: string;
   body?: string;
   icon: string;
   isSoon?: boolean;
+  to: string;
 }
-const Door = ({ title, body, icon, isSoon = false }: DoorProps) => {
+const Door = ({ title, body, icon, isSoon = false, to }: DoorProps) => {
   const [hover, setHover] = useState(false);
+  const navigate = useNavigate();
   return (
     <AspectRatio ratio={397 / 522} w={{ base: "70%", lg: "24vw" }}>
       <Box
+        onClick={() => navigate(to)}
         background={`url("${isSoon ? soonDoor : doorFrame}")`}
         bgSize="cover"
         backgroundPosition="center"
