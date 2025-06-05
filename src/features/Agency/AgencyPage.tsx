@@ -17,7 +17,7 @@ import { WhatWeDoCard } from "./components/WhatWeDoCard";
 
 export default function AgencyPage() {
   return (
-    <Box position={"absolute"} top={"0"} width={"100%"} overflow={"hidden"}>
+    <Box position={"relative"} top={"0"} width={"100%"} overflow={"hidden"}>
       <Box
         h={"100vh"}
         width={"100%"}
@@ -81,7 +81,7 @@ export default function AgencyPage() {
           backgroundPosition={"center"}
           mt={{ base: "3rem", lg: "6rem" }}
         >
-          <SimpleGrid columns={[1, 2]} justifySelf={"center"}>
+          <SimpleGrid columns={[1, 2]} justifySelf={"center"} gap={"1rem"}>
             <WhatWeDoCard icon={icPrivateGathering} title="Private Gathering" />
             <WhatWeDoCard
               icon={icCorporate}

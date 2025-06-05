@@ -14,6 +14,7 @@ export function HeroSection() {
       backgroundRepeat={"no-repeat"}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
+      pt="80px"
     >
       {/* <NavBar /> */}
       <HeroOverlay />
