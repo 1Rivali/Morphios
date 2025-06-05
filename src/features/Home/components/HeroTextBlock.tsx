@@ -7,14 +7,15 @@ export function HeroTextBlock() {
   return (
     <Box
       position="relative"
-      top="38%"
+      top={{ base: "30%", lg: "38%" }}
       flexDir="column"
       textAlign="center"
       width="full"
+      justifyContent={"center"}
     >
       <MotionText
         fontWeight="700"
-        fontSize="3.4rem"
+        fontSize={{ base: "1.2rem", lg: "3.4rem" }}
         initial={{ y: -100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{
@@ -28,7 +29,7 @@ export function HeroTextBlock() {
 
       <MotionText
         fontWeight="700"
-        fontSize="3.4rem"
+        fontSize={{ base: "1.2rem", lg: "3.4rem" }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{
@@ -42,7 +43,9 @@ export function HeroTextBlock() {
 
       <MotionText
         fontWeight="700"
-        fontSize="1.5rem"
+        fontSize={{ base: "1rem", lg: "1.5rem" }}
+        width={{ base: "70%", lg: "full" }}
+        justifySelf={"center"}
         mt="2rem"
         background="linear-gradient(90deg, #FFF 0%, #999 100%)"
         backgroundClip="text"

@@ -1,6 +1,12 @@
-import { doorsBg, purpleCircle } from "@/core/constants/assets";
+import {
+  doorsBg,
+  icAgency,
+  icLock,
+  icProductionHouse,
+  purpleCircle,
+} from "@/core/constants/assets";
 import { MotionBox } from "@/core/utils/motion-components";
-import { Box, Heading, HStack } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import Door from "./Door";
 
 const DoorsSection = () => {
@@ -18,7 +24,6 @@ const DoorsSection = () => {
         background={`url("${doorsBg}")`}
         backgroundSize={"contain"}
         backgroundPosition={"bottom"}
-        height={"100vh"}
         width={"full"}
         backgroundRepeat={"no-repeat"}
         display={"flex"}
@@ -26,12 +31,15 @@ const DoorsSection = () => {
         justifyContent={"center"}
         textAlign={"center"}
       >
-        <Heading as={"h1"} fontSize={"2.8rem"}>
+        <Heading as={"h1"} fontSize={{ base: "1rem", lg: "2.8rem" }}>
           Enter through one of the two doors:
         </Heading>
-        <HStack
+        <Flex
+          flexDir={{ base: "column", lg: "row" }}
           justifyContent={"center"}
+          alignItems={"center"}
           mt={"4rem"}
+          gap={"2rem"}
           textAlign={"start"}
           background={`url("${purpleCircle}")`}
           backgroundRepeat={"no-repeat"}
@@ -39,16 +47,20 @@ const DoorsSection = () => {
           backgroundPosition={"center"}
         >
           <Door
+            icon={icAgency}
             title="The Agency"
             body="Performers of the unseen Experiences that don’t end when they’re over —
-                  they echo."
+                they echo."
           />
-          <Box width={"2rem"} />
+
           <Door
+            icon={icProductionHouse}
             title="The Production House"
             body="Stories carved from silence. Cinematic reflections of memory, myth, and the moment."
           />
-        </HStack>
+
+          <Door icon={icLock} title="Closed For Now" isSoon />
+        </Flex>
       </Box>
     </MotionBox>
   );

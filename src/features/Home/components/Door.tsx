@@ -1,62 +1,65 @@
-import { door } from "@/core/constants/assets";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { doorFrame, soonDoor } from "@/core/constants/assets";
+import { AspectRatio, Box, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
-
 interface DoorProps {
   title: string;
-  body: string;
+  body?: string;
+  icon: string;
+  isSoon?: boolean;
 }
-
-function Door({ title, body }: DoorProps) {
-  const [hover, setHover] = useState<boolean>(false);
-
+const Door = ({ title, body, icon, isSoon = false }: DoorProps) => {
+  const [hover, setHover] = useState(false);
   return (
-    <Box
-      height="70vh"
-      position="relative"
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
-      <Image src={door} alt="door" height="full" width="full" zIndex={0} />
-
+    <AspectRatio ratio={397 / 522} w={{ base: "70%", lg: "24vw" }}>
       <Box
-        position="absolute"
-        top="6%"
-        left="8.3%"
-        w="85%"
-        h="88%"
-        bg="linear-gradient(to bottom, rgb(87, 69, 104), #2F2F2F)"
-        opacity={hover ? 0.3 : 0}
-        transition="opacity 1s ease"
-        pointerEvents="none"
-        zIndex={5}
-      />
-
-      <Text
-        position="absolute"
-        top="15%"
-        left="52%"
-        transform="translateX(-50%)"
-        fontSize="1.3rem"
-        textAlign="center"
-        width="100%"
-        zIndex={10}
+        background={`url("${isSoon ? soonDoor : doorFrame}")`}
+        bgSize="cover"
+        backgroundPosition="center"
+        bgRepeat="no-repeat"
+        backgroundColor={hover ? "transparent" : "black"}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
       >
-        {title}
-      </Text>
-
-      <Text
-        position="absolute"
-        top="37%"
-        left="22%"
-        fontSize="1.13rem"
-        width="70%"
-        zIndex={10}
-      >
-        {body}
-      </Text>
-    </Box>
+        <Box
+          display={"flex"}
+          flexDir={"column"}
+          justifyContent={"start"}
+          alignItems={"start"}
+          height={"full"}
+          paddingTop={"20%"}
+          textAlign={"center"}
+        >
+          <Image
+            src={icon}
+            alt="logo"
+            mb={4}
+            mx="auto"
+            width={{ base: "3rem", lg: "5rem" }}
+            height={{ base: "3rem", lg: "5rem" }}
+            fit={"contain"}
+          />
+          <Text
+            fontWeight={"extrabold"}
+            fontSize={{ base: "md", lg: "xl" }}
+            width={"100%"}
+          >
+            {title}
+          </Text>
+          {!isSoon && (
+            <Text
+              fontSize={{ base: "sm", lg: "1.13rem" }}
+              width={"66%"}
+              textAlign={"start"}
+              mt={"20%"}
+              ml={"16%"}
+            >
+              {body}
+            </Text>
+          )}
+        </Box>
+      </Box>
+    </AspectRatio>
   );
-}
+};
 
 export default Door;

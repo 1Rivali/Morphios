@@ -1,11 +1,10 @@
 // src/components/HeroOverlay.jsx
-import { banner } from "@/core/constants/assets";
-import { Box, Image } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 export function HeroOverlay() {
   return (
     <>
-      <Image
+      {/* <Image
         src={banner}
         position="absolute"
         top={0}
@@ -14,7 +13,7 @@ export function HeroOverlay() {
         height="100%"
         objectFit="cover"
         zIndex={0}
-      />
+      /> */}
       <Box
         position="absolute"
         top={0}

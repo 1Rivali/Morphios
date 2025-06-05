@@ -1,5 +1,5 @@
 // src/components/BottomSection.jsx
-import { blackAnimation } from "@/core/constants/assets";
+import { whiteAnimation } from "@/core/constants/assets";
 import { MotionText } from "@/core/utils/motion-components";
 import { Box } from "@chakra-ui/react";
 import { useAnimation, useInView } from "framer-motion";
@@ -56,9 +56,9 @@ export function Section02() {
   }, [controls, isInView]);
   return (
     <Box
-      height="100vh"
+      height="70vh"
       width="100%"
-      background={`url("${blackAnimation}")`}
+      background={`url("${whiteAnimation}")`}
       backgroundRepeat="no-repeat"
       backgroundSize="contain"
       backgroundPosition="center"
@@ -72,16 +72,14 @@ export function Section02() {
         initial={{ y: 75, x: 0, opacity: 0 }}
         ref={ref}
         animate={controls}
-        style={{
-          fontSize: "3.7rem",
-          fontWeight: "700",
-          willChange: "transform, opacity",
-        }}
+        fontSize={{ base: "1.2rem", lg: "3.7rem" }}
+        fontWeight={"700"}
+        willChange={"transform, opacity"}
       >
         Morphios is a living practice.
       </MotionText>
       <MotionText
-        fontSize="2rem"
+        fontSize={{ base: "1.2rem", lg: "2rem" }}
         fontWeight="400"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -94,7 +92,7 @@ export function Section02() {
         A whisper in performance
       </MotionText>
       <MotionText
-        fontSize="2rem"
+        fontSize={{ base: "1.2rem", lg: "2rem" }}
         fontWeight="400"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
