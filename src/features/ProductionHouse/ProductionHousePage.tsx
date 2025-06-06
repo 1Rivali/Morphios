@@ -7,9 +7,11 @@ import {
   underWater,
 } from "@/core/constants/assets";
 import { Box, Heading, Image, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { AgencyCard } from "../Agency/components/AgencyCard";
 
 export default function ProductionHouse() {
+  const navigate = useNavigate();
   return (
     <Box position={"relative"} top={"0"} width={"100%"} overflow={"hidden"}>
       <Box
@@ -80,7 +82,11 @@ like a feeling you can’t name or a dream you didn’t want to wake from."
         >
           Let’s create something that lingers.
         </Heading>
-        <MorphButton text="Step Through" width={{ base: "75%", lg: "20%" }} />
+        <MorphButton
+          text="Step Through"
+          width={{ base: "75%", lg: "20%" }}
+          onClick={() => navigate("/book-magician")}
+        />
       </Box>
     </Box>
   );

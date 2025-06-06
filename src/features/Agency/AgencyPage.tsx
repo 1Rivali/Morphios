@@ -12,10 +12,12 @@ import {
   theaterBlure,
 } from "@/core/constants/assets";
 import { Box, Heading, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { AgencyCard } from "./components/AgencyCard";
 import { WhatWeDoCard } from "./components/WhatWeDoCard";
 
 export default function AgencyPage() {
+  const navigate = useNavigate();
   return (
     <Box position={"relative"} top={"0"} width={"100%"} overflow={"hidden"}>
       <Box
@@ -131,7 +133,11 @@ export default function AgencyPage() {
         >
           Book a magician now
         </Heading>
-        <MorphButton text="Step Through" width={{ base: "75%", lg: "20%" }} />
+        <MorphButton
+          text="Step Through"
+          width={{ base: "75%", lg: "20%" }}
+          onClick={() => navigate("/book-magician")}
+        />
       </Box>
     </Box>
   );

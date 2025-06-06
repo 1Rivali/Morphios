@@ -1,6 +1,7 @@
 import { icMenu, logo } from "@/core/constants/assets";
-import { Box, HStack, Image, Text, useBreakpointValue } from "@chakra-ui/react";
+import { Box, HStack, Image, useBreakpointValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { NavLinkItem } from "./NavLink";
 
 export function NavBar() {
   const isMobile = useBreakpointValue({ base: true, lg: false });
@@ -10,7 +11,6 @@ export function NavBar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -36,10 +36,10 @@ export function NavBar() {
         <>
           <Box />
           <HStack gap={6} color="white">
-            <Text cursor="pointer">Home</Text>
-            <Text cursor="pointer">The Origin</Text>
-            <Text cursor="pointer">Book a magician</Text>
-            <Text cursor="pointer">Our Pillars</Text>
+            <NavLinkItem to="/" label="Home" exact />
+            <NavLinkItem to="/origin" label="The Origin" />
+            <NavLinkItem to="/book-magician" label="Book a magician" />
+            <NavLinkItem to="/#home-pillars" label="Our Pillars" />
           </HStack>
           <Box width="25vw" />
         </>

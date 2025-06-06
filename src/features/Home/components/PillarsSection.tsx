@@ -4,7 +4,7 @@ import Pillar from "./Pillar";
 
 const PillarsSection = () => {
   return (
-    <Box mt={"20vh"}>
+    <Box id="home-pillars" mt={"20vh"}>
       <Box
         width={"full"}
         display={"flex"}

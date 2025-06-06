@@ -1,5 +1,6 @@
 import MorphButton from "@/components/MorphButton";
 import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 interface DetailsCardProps {
   icon: string;
@@ -15,6 +16,7 @@ export function DoorDetailsCard({
   description,
   image,
 }: DetailsCardProps) {
+  const navigate = useNavigate();
   return (
     <Box height={"full"}>
       <Flex
@@ -79,7 +81,7 @@ export function DoorDetailsCard({
             {description}
           </Text>
           <MorphButton
-            onClick={() => {}}
+            onClick={() => navigate("/book-magician")}
             text="Step Through"
             width={{
               base: "70%",
