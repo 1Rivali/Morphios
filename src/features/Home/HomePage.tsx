@@ -1,10 +1,13 @@
 import { MotionBox } from "@/core/utils/motion-components";
 import { useEffect } from "react";
-import DoorDetailsSection from "./components/DoorDetailsSection";
-import DoorsSection from "./components/DoorsSection";
 import { HeroSection } from "./components/HeroSection";
-import PillarsSection from "./components/PillarsSection";
-import { Section02 } from "./components/Section02";
+import MeetTheMinds from "./components/MeetTheMinds";
+import WhatIsMorphios from "./components/WhatIsMorphios";
+import BookMagician from "./components/BookMagician";
+import SacredDance from "./components/SacredDance";
+import StepIntoMystery from "./components/StepIntoMystery";
+import DoorDetailsSection from "./components/DoorDetailsSection";
+import BookMagician2 from "./components/BookMagician2";
 
 export default function HomePage() {
   useEffect(() => {
@@ -29,10 +32,13 @@ export default function HomePage() {
       overflow={"hidden"}
     >
       <HeroSection />
-      <Section02 />
-      <DoorsSection />
-      <PillarsSection />
+      <WhatIsMorphios />
+      <MeetTheMinds />
+      <BookMagician />
+      <SacredDance />
+      <StepIntoMystery />
       <DoorDetailsSection />
+      <BookMagician2 />
     </MotionBox>
   );
 }

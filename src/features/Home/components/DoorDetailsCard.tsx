@@ -75,8 +75,9 @@ export function DoorDetailsCard({
             }}
             mb={{
               base: "1rem",
-              lg: "5rem",
+              lg: "1rem",
             }}
+            fontFamily={"roboto"}
           >
             {description}
           </Text>
@@ -87,6 +88,9 @@ export function DoorDetailsCard({
               base: "70%",
               lg: "30%",
             }}
+            color="white"
+            bgColor="black"
+            arrowIc={false}
           />
         </Box>
         <Image
