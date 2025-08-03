@@ -4,20 +4,39 @@ import { Button, Image } from "@chakra-ui/react";
 interface MorphButtonProps {
   onClick?: () => void;
   width?:
-  | string
-  | {
-    base: string;
-    lg: string;
-  };
+    | string
+    | {
+        base: string;
+        lg: string;
+      };
   text: string;
   bgColor?: string;
   color?: string;
   arrowIc?: boolean;
-  fontSize?: string;
-  p?: string
+  fontSize?:
+    | string
+    | {
+        base: string;
+        lg: string;
+      };
+  p?:
+    | string
+    | {
+        base: string;
+        lg: string;
+      };
 }
 
-const MorphButton = ({ onClick, text, width, bgColor, color, arrowIc = true, fontSize, p }: MorphButtonProps) => {
+const MorphButton = ({
+  onClick,
+  text,
+  width,
+  bgColor,
+  color,
+  arrowIc = true,
+  fontSize,
+  p,
+}: MorphButtonProps) => {
   return (
     <Button
       onClick={onClick}
@@ -27,7 +46,7 @@ const MorphButton = ({ onClick, text, width, bgColor, color, arrowIc = true, fon
       fontWeight={"extrabold"}
       fontFamily={"roboto"}
       borderRadius={"xl"}
-      fontSize={fontSize}
+      fontSize={fontSize ?? "md"}
       p={p}
     >
       {text}

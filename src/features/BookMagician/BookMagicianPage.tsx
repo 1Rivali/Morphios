@@ -13,10 +13,27 @@ import {
   Heading,
   Image,
   Input,
+  Portal,
+  Select,
   Separator,
   Text,
   Textarea,
+  createListCollection,
 } from "@chakra-ui/react";
+
+const performers = createListCollection({
+  items: [
+    {
+      label: "Tawfeeq Jastanieah - Founder & Lead Performer",
+      value: "tawfeeq",
+    },
+    {
+      label: "Abderrahman Chergui - Experience Architect",
+      value: "abderrahman",
+    },
+    { label: "Any Available Performer", value: "any" },
+  ],
+});
 
 export default function BookMagicianPage() {
   return (
@@ -67,7 +84,7 @@ export default function BookMagicianPage() {
       </Box>
 
       <Box
-        height={"120vh"}
+        height={"150vh"}
         background={`url("${formBg}")`}
         backgroundRepeat={"no-repeat"}
         backgroundSize={"cover"}
@@ -88,7 +105,7 @@ export default function BookMagicianPage() {
         </Text>
         <AspectRatio
           ratio={{ base: 1 / 2, lg: 631 / 785 }}
-          width={{ base: "90%", lg: "35%" }}
+          width={{ base: "90%", lg: "40%" }}
           mt={"5vh"}
         >
           <Box
@@ -129,6 +146,47 @@ export default function BookMagicianPage() {
                   backgroundColor={"#111111"}
                   placeholder="Enter your email"
                 />
+              </Field.Root>
+              <Field.Root>
+                <Field.Label>City</Field.Label>
+                <Input
+                  variant={"subtle"}
+                  backgroundColor={"#111111"}
+                  placeholder="Enter your city"
+                />
+              </Field.Root>
+              <Field.Root>
+                <Field.Label>Select Performer</Field.Label>
+                <Select.Root
+                  collection={performers}
+                  variant="subtle"
+                  backgroundColor="#111111"
+                >
+                  <Select.HiddenSelect />
+                  <Select.Control>
+                    <Select.Trigger>
+                      <Select.ValueText placeholder="Choose a performer" />
+                    </Select.Trigger>
+                    <Select.IndicatorGroup>
+                      <Select.Indicator />
+                    </Select.IndicatorGroup>
+                  </Select.Control>
+                  <Portal>
+                    <Select.Positioner>
+                      <Select.Content
+                        backgroundColor="#111111"
+                        border="1px solid rgba(255, 255, 255, 0.1)"
+                      >
+                        {performers.items.map((performer) => (
+                          <Select.Item item={performer} key={performer.value}>
+                            {performer.label}
+                            <Select.ItemIndicator />
+                          </Select.Item>
+                        ))}
+                      </Select.Content>
+                    </Select.Positioner>
+                  </Portal>
+                </Select.Root>
               </Field.Root>
               <Field.Root>
                 <Field.Label>Description of Event</Field.Label>

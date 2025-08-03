@@ -57,7 +57,7 @@ import icWhatIsMorph1 from "../../assets/svg/whatIsMorph1.svg";
 import icWhatIsMorph2 from "../../assets/svg/whatIsMorph2.svg";
 import icWhatIsMorph3 from "../../assets/svg/whatIsMorph3.svg";
 import tawfeek from "../../assets/svg/tawfeek.svg";
-import icMeetTheMinds from "../../assets/svg/icMeetTheMinds.svg"
+import icMeetTheMinds from "../../assets/svg/icMeetTheMinds.svg";
 import bookMagicianBgv2 from "../../assets/svg/bookMagicianBg.svg";
 import sacredDanceSection from "../../assets/svg/sacredDanceSection.svg";
 import stepIntoMystery from "../../assets/svg/StepIntoMystrey.svg";
@@ -69,13 +69,17 @@ import layers from "../../assets/svg/layers.svg";
 import invitation from "../../assets/svg/invitation.svg";
 import transformationBg from "../../assets/svg/transformationBg.svg";
 import icTransformation from "../../assets/svg/icTransformation.svg";
-import MainfestoBookBg from "../../assets/svg/mainfesto-book-bg.svg"
+import MainfestoBookBg from "../../assets/svg/mainfesto-book-bg.svg";
 import morphicMentalism from "../../assets/svg/morphic-mentalism.svg";
 import performers from "../../assets/svg/Performers.svg";
-import inviteMagic from "../../assets/svg/InviteMagic.svg"
-import logoAnimated from "../../assets/svg/logo.json"
+import inviteMagic from "../../assets/svg/InviteMagic.svg";
+import logoAnimated from "../../assets/svg/logo.json";
+import performersBg from "../../assets/svg/performersBg.svg";
+import tawfeekPerformer from "../../assets/svg/tawfeek-performer.svg";
 
 export {
+  tawfeekPerformer,
+  performersBg,
   logoAnimated,
   inviteMagic,
   performers,
