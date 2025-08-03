@@ -3,9 +3,11 @@ import {
   inviteMagic,
   performersBg,
   tawfeekPerformer,
+  underWater,
 } from "@/core/constants/assets";
 import { Box, Center, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { AgencyCard } from "../Agency/components/AgencyCard";
 const performers: PerformerCardProps[] = [
   {
     image: tawfeekPerformer,
@@ -59,7 +61,7 @@ export default function PerformersPage() {
         </SimpleGrid>
       </Box>
       {/* <Image mt={"3%"} src={performers} aspectRatio={1464 / 1586} /> */}
-      <Box>
+      {/* <Box>
         <Center position={"relative"}>
           <Image
             src={inviteMagic}
@@ -81,7 +83,17 @@ export default function PerformersPage() {
             />
           </Box>
         </Center>
-      </Box>
+      </Box> */}
+      <AgencyCard
+        title="Invite magic into your space"
+        desc1="Not a show. A shared moment of transformation.
+Let mystery step across your threshold.
+Because some questions are better felt than answered.
+Begin the ritual of awe."
+        desc2=""
+        showButton
+        image={underWater}
+      />
     </Box>
   );
 }

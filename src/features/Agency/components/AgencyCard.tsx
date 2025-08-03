@@ -1,10 +1,13 @@
+import MorphButton from "@/components/MorphButton";
 import { Box, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 interface AgencyCardProps {
   title: string;
   image: string;
   desc1: string;
   desc2: string;
   rowReversed?: boolean;
+  showButton?: boolean;
 }
 export function AgencyCard({
   title,
@@ -12,7 +15,9 @@ export function AgencyCard({
   desc1,
   desc2,
   rowReversed,
+  showButton,
 }: AgencyCardProps) {
+  const navigate = useNavigate();
   return (
     <Flex
       flexDir={{
@@ -55,6 +60,13 @@ export function AgencyCard({
         >
           {desc2}
         </Text>
+        {showButton && (
+          <MorphButton
+            text="Book A Magician"
+            width={{ base: "100%", lg: "50%" }}
+            onClick={() => navigate("/book-magician")}
+          />
+        )}
       </Box>
       <Image width={{ base: "full", lg: "60vw" }} src={image} />
     </Flex>
