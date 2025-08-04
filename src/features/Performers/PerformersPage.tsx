@@ -1,12 +1,9 @@
-import MorphButton from "@/components/MorphButton";
 import {
-  inviteMagic,
   performersBg,
   tawfeekPerformer,
   underWater,
 } from "@/core/constants/assets";
-import { Box, Center, Image, SimpleGrid, Text } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Box, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import { AgencyCard } from "../Agency/components/AgencyCard";
 const performers: PerformerCardProps[] = [
   {
@@ -37,7 +34,6 @@ const performers: PerformerCardProps[] = [
   },
 ];
 export default function PerformersPage() {
-  const navigate = useNavigate();
   return (
     <Box>
       <Box
