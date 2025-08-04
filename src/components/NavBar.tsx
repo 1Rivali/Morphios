@@ -1,4 +1,4 @@
-import { icMenu, logo } from "@/core/constants/assets";
+import { icMenu, logo, logoAnimated } from "@/core/constants/assets";
 import {
   Box,
   HStack,
@@ -9,14 +9,16 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { NavLinkItem } from "./NavLink";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Lottie from "react-lottie";
+import MorphButton from "./MorphButton";
 
 export function NavBar() {
   const isMobile = useBreakpointValue({ base: true, lg: false });
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -49,12 +51,21 @@ export function NavBar() {
         px={6}
         zIndex={1000}
         justifyContent="space-between"
-        background={scrolled ? "#1E1E1E" : "transparent"}
+        // backgroundColor="transparent"
+        background={scrolled ? "#000000" : "transparent"}
         backdropFilter={scrolled ? "saturate(180%) blur(10px)" : "none"}
         transition="background-color 0.3s ease, backdrop-filter 0.3s ease"
       >
-        {!isMobile && <Box />}
-        <Image src={logo} height={{ base: "40px", lg: "60px" }} />
+        <Box
+          justifySelf={"start"}
+          onClick={() => navigate("/")}
+          cursor={"pointer"}
+        >
+          <Lottie
+            options={{ animationData: logoAnimated, loop: true }}
+            height={"60px"}
+          />
+        </Box>
         {!isMobile && (
           <>
             <Box />
@@ -64,8 +75,14 @@ export function NavBar() {
               <NavLinkItem to="/book-magician" label="Book a magician" />
               <NavLinkItem to="/performers" label="Our Performers" />
             </HStack>
-            <Box width="25vw" />
           </>
+        )}
+        {!isMobile && (
+          <MorphButton
+            text="Book a magician"
+            onClick={() => navigate("/book-magician")}
+            width={"12%"}
+          />
         )}
         {isMobile && (
           <Image
@@ -95,7 +112,7 @@ export function NavBar() {
           justifyContent="center"
           animation="slideIn 0.3s ease-out"
         >
-          <Box
+          {/* <Box
             position="absolute"
             top={6}
             right={6}
@@ -106,7 +123,7 @@ export function NavBar() {
             <Text fontSize="3xl" color="white">
               ×
             </Text>
-          </Box>
+          </Box> */}
 
           <Image src={logo} height="60px" mb={12} />
 
