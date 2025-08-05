@@ -68,7 +68,6 @@ export function NavBar() {
         </Box>
         {!isMobile && (
           <>
-            <Box />
             <HStack gap={6} color="white">
               <NavLinkItem to="/" label="Home" exact />
               <NavLinkItem to="/origin" label="The Origin" />
