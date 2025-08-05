@@ -1,4 +1,4 @@
-import { icMenu, logo, logoAnimated } from "@/core/constants/assets";
+import { icMenu, logoAnimated } from "@/core/constants/assets";
 import {
   Box,
   HStack,
@@ -61,17 +61,19 @@ export function NavBar() {
           onClick={() => navigate("/")}
           cursor={"pointer"}
         >
-          <Lottie
-            options={{ animationData: logoAnimated, loop: true }}
-            height={"60px"}
-          />
+          {!isMenuOpen && (
+            <Lottie
+              options={{ animationData: logoAnimated, loop: true }}
+              height={"60px"}
+            />
+          )}
         </Box>
         {!isMobile && (
           <>
             <HStack gap={6} color="white">
-              <NavLinkItem to="/" label="Home" exact />
+              {/* <NavLinkItem to="/" label="Home" exact /> */}
               <NavLinkItem to="/origin" label="The Origin" />
-              <NavLinkItem to="/book-magician" label="Book a magician" />
+              {/* <NavLinkItem to="/book-magician" label="Book a magician" /> */}
               <NavLinkItem to="/performers" label="Our Performers" />
             </HStack>
           </>
@@ -88,7 +90,8 @@ export function NavBar() {
             src={icMenu}
             cursor="pointer"
             onClick={handleMenuClick}
-            transition="opacity 0.3s ease"
+            transform={isMenuOpen ? "rotate(90deg)" : "rotate(0deg)"}
+            transition="opacity 0.3s ease, transform 0.3s ease"
             _hover={{ opacity: 0.8 }}
           />
         )}
@@ -124,7 +127,11 @@ export function NavBar() {
             </Text>
           </Box> */}
 
-          <Image src={logo} height="60px" mb={12} />
+          <Lottie
+            options={{ animationData: logoAnimated, loop: true }}
+            height={"100px"}
+            style={{ marginBottom: "24px" }}
+          />
 
           <VStack
             gap={8}
