@@ -1,4 +1,8 @@
-import { icMeetTheMinds, tawfeek } from "@/core/constants/assets";
+import {
+  abderrahmanPerformer,
+  icMeetTheMinds,
+  tawfeek,
+} from "@/core/constants/assets";
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import MindsCard, { MindsCardProps } from "./MindsCard";
 
@@ -15,7 +19,7 @@ const minds: MindsCardProps[] = [
     name: "Abderrahman Chergui",
     resp: "Co-Founder | Experience Architect | Systems & Operations Maestro",
     description: `Abderrahman is the silent pulse behind Morphios, the architect of flow, the designer of depth, and the maestro of the structures and subtleties that breathe beneath the surface.`,
-    image: tawfeek,
+    image: abderrahmanPerformer,
   },
 ];
 

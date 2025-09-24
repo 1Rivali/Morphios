@@ -56,7 +56,7 @@ import shadow from "../../assets/svg/shadows.png";
 import icWhatIsMorph1 from "../../assets/svg/whatIsMorph1.svg";
 import icWhatIsMorph2 from "../../assets/svg/whatIsMorph2.svg";
 import icWhatIsMorph3 from "../../assets/svg/whatIsMorph3.svg";
-import tawfeek from "../../assets/svg/tawfeek.svg";
+import tawfeek from "../../assets/svg/twfeeq-performer.jpeg";
 import icMeetTheMinds from "../../assets/svg/icMeetTheMinds.svg";
 import bookMagicianBgv2 from "../../assets/svg/bookMagicianBg.svg";
 import sacredDanceSection from "../../assets/svg/sacredDanceSection.svg";
@@ -75,9 +75,11 @@ import performers from "../../assets/svg/Performers.svg";
 import inviteMagic from "../../assets/svg/InviteMagic.svg";
 import logoAnimated from "../../assets/svg/logo.json";
 import performersBg from "../../assets/svg/performersBg.svg";
-import tawfeekPerformer from "../../assets/svg/tawfeek-performer.svg";
+import tawfeekPerformer from "../../assets/svg/twfeeq-performer.jpeg";
+import abderrahmanPerformer from "../../assets/svg/abderrahman-performer.jpeg";
 
 export {
+  abderrahmanPerformer,
   tawfeekPerformer,
   performersBg,
   logoAnimated,

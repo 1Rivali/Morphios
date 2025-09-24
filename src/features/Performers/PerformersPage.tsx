@@ -1,4 +1,5 @@
 import {
+  abderrahmanPerformer,
   performersBg,
   tawfeekPerformer,
   underWater,
@@ -20,7 +21,7 @@ const performers: PerformerCardProps[] = [
       "And perhaps, when you leave, you'll carry something unseen with you. A quiet reminder of how beautifully connected we truly are.",
   },
   {
-    image: tawfeekPerformer,
+    image: abderrahmanPerformer,
     name: "Abderrahman Chergui",
     title: "Co-Founder | Experience Architect | Systems & Operations Maestro",
     description:
@@ -122,15 +123,23 @@ const PerformerCard = ({
       borderRadius={"10px"}
     >
       <Box position={"relative"}>
-        <Image src={image} width={"500px"} />
-        <Box position={"absolute"} bottom={"10%"} left={"10%"}>
-          <Text fontSize={"2xl"} fontWeight={"bold"}>
-            {name}
-          </Text>
-          <Text>{title}</Text>
+        <Image src={image} width={"400px"} height={"500px"} />
+        <Box>
+          <Box
+            width={"100%"}
+            position={"absolute"}
+            bottom={"0"}
+            backgroundColor={"blackAlpha.700"}
+            p={"1rem"}
+          >
+            <Text fontSize={"2xl"} fontWeight={"bold"}>
+              {name}
+            </Text>
+            <Text>{title}</Text>
+          </Box>
         </Box>
       </Box>
-      <Box width={"80%"}>
+      <Box width={"80%"} mt={"1rem"}>
         <Text fontFamily={"roboto"}>{description}</Text>
         <br />
         <Text fontFamily={"roboto"}>{description2}</Text>
