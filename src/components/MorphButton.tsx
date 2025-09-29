@@ -25,6 +25,7 @@ interface MorphButtonProps {
         base: string;
         lg: string;
       };
+  disabled?: boolean;
 }
 
 const MorphButton = ({
@@ -36,6 +37,7 @@ const MorphButton = ({
   arrowIc = true,
   fontSize,
   p,
+  disabled = false,
 }: MorphButtonProps) => {
   return (
     <Button
@@ -48,6 +50,7 @@ const MorphButton = ({
       borderRadius={"xl"}
       fontSize={fontSize ?? "md"}
       p={p}
+      disabled={disabled}
     >
       {text}
       {arrowIc && <Image src={arrowRight} />}

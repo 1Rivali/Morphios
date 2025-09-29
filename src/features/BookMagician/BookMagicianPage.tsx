@@ -20,6 +20,10 @@ import {
   Textarea,
   createListCollection,
 } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const performers = createListCollection({
   items: [
@@ -35,7 +39,86 @@ const performers = createListCollection({
   ],
 });
 
+interface ContactFormData {
+  name: string;
+  phone: string;
+  email: string;
+  city: string;
+  performer: string;
+  description: string;
+}
+
 export default function BookMagicianPage() {
+  const [formData, setFormData] = useState<ContactFormData>({
+    name: "",
+    phone: "",
+    email: "",
+    city: "",
+    performer: "",
+    description: "",
+  });
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: ContactFormData) => {
+      const response = await axios.post(
+        "https://api.morphicarts.sa/contacts",
+        data
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      // Reset form on success
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        city: "",
+        performer: "",
+        description: "",
+      });
+      toast.success("Your message has been sent successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    },
+    onError: (error) => {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    },
+  });
+
+  const handleInputChange = (field: keyof ContactFormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = () => {
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.phone) {
+      toast.warning("Please fill in all required fields (Name, Email, Phone)", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+
+    contactMutation.mutate(formData);
+  };
+
   return (
     <Box position={"relative"} top={"0"} width={"100%"} overflow={"hidden"}>
       <Box
@@ -129,6 +212,8 @@ export default function BookMagicianPage() {
                   variant={"subtle"}
                   backgroundColor={"#111111"}
                   placeholder="Enter your name"
+                  value={formData.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
                 />
               </Field.Root>
               <Field.Root>
@@ -137,6 +222,8 @@ export default function BookMagicianPage() {
                   variant={"subtle"}
                   backgroundColor={"#111111"}
                   placeholder="Enter your Phone Number"
+                  value={formData.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
                 />
               </Field.Root>
               <Field.Root>
@@ -145,6 +232,8 @@ export default function BookMagicianPage() {
                   variant={"subtle"}
                   backgroundColor={"#111111"}
                   placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
                 />
               </Field.Root>
               <Field.Root>
@@ -153,6 +242,8 @@ export default function BookMagicianPage() {
                   variant={"subtle"}
                   backgroundColor={"#111111"}
                   placeholder="Enter your city"
+                  value={formData.city}
+                  onChange={(e) => handleInputChange("city", e.target.value)}
                 />
               </Field.Root>
               <Field.Root>
@@ -161,6 +252,10 @@ export default function BookMagicianPage() {
                   collection={performers}
                   variant="subtle"
                   backgroundColor="#111111"
+                  value={[formData.performer]}
+                  onValueChange={(details) =>
+                    handleInputChange("performer", details.value[0] || "")
+                  }
                 >
                   <Select.HiddenSelect />
                   <Select.Control>
@@ -195,9 +290,19 @@ export default function BookMagicianPage() {
                   backgroundColor={"#111111"}
                   placeholder="Share your vision, space, or the feeling you want to create"
                   height={"30vh"}
+                  value={formData.description}
+                  onChange={(e) =>
+                    handleInputChange("description", e.target.value)
+                  }
                 />
               </Field.Root>
-              <MorphButton text="Send the Signal" />
+              <MorphButton
+                text={
+                  contactMutation.isPending ? "Sending..." : "Send the Signal"
+                }
+                onClick={handleSubmit}
+                disabled={contactMutation.isPending}
+              />
             </Box>
           </Box>
         </AspectRatio>
