@@ -60,9 +60,19 @@ export default function BookMagicianPage() {
 
   const contactMutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
+      // Map form data to match backend validation requirements
+      const payload = {
+        name: data.name,
+        email: data.email,
+        message: data.description, // Map description to message field
+        phone: data.phone,
+        city: data.city,
+        performer: data.performer,
+      };
+
       const response = await axios.post(
         "https://api.morphicarts.sa/contacts",
-        data
+        payload
       );
       return response.data;
     },
@@ -85,16 +95,53 @@ export default function BookMagicianPage() {
         draggable: true,
       });
     },
-    onError: (error) => {
+    onError: (error: unknown) => {
       console.error("Error sending message:", error);
-      toast.error("Failed to send message. Please try again.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+
+      // Handle backend validation errors
+      if (error && typeof error === "object" && "response" in error) {
+        const axiosError = error as {
+          response?: { data?: { errors?: Record<string, string[]> } };
+        };
+        if (axiosError.response?.data?.errors) {
+          const backendErrors = axiosError.response.data.errors;
+          const errorMessages: string[] = [];
+
+          // Extract error messages from backend response
+          Object.values(backendErrors).forEach((errorArray: string[]) => {
+            if (Array.isArray(errorArray)) {
+              errorMessages.push(...errorArray);
+            }
+          });
+
+          toast.error(errorMessages.join(", "), {
+            position: "top-right",
+            autoClose: 7000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        } else {
+          toast.error("Failed to send message. Please try again.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+      } else {
+        toast.error("Failed to send message. Please try again.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
     },
   });
 
@@ -102,12 +149,54 @@ export default function BookMagicianPage() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Email validation function
+  const isValidEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Phone validation function (not used in current validation but kept for future use)
+  // const isValidPhone = (phone: string): boolean => {
+  //   const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
+  //   return phoneRegex.test(phone.replace(/[\s\-()]/g, ''));
+  // };
+
+  // Comprehensive form validation matching backend requirements
+  const validateForm = (): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+
+    // Required field validation (matching backend: name, email, message)
+    if (!formData.name.trim()) {
+      errors.push("Name is required");
+    } else if (formData.name.length > 255) {
+      errors.push("Name must be less than 255 characters");
+    }
+
+    if (!formData.email.trim()) {
+      errors.push("Email is required");
+    } else if (!isValidEmail(formData.email)) {
+      errors.push("The email field must be a valid email address");
+    } else if (formData.email.length > 255) {
+      errors.push("Email must be less than 255 characters");
+    }
+
+    if (!formData.description.trim()) {
+      errors.push("The message field is required");
+    }
+
+    return {
+      isValid: errors.length === 0,
+      errors,
+    };
+  };
+
   const handleSubmit = () => {
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.phone) {
-      toast.warning("Please fill in all required fields (Name, Email, Phone)", {
+    const validation = validateForm();
+
+    if (!validation.isValid) {
+      toast.warning(validation.errors.join(", "), {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 7000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
