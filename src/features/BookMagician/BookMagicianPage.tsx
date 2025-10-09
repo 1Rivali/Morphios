@@ -73,6 +73,11 @@ export default function BookMagicianPage() {
       const response = await axios.post(
         "https://api.morphicarts.sa/contacts",
         payload,
+        {
+          headers: {
+            Accept: "application/json"
+          }
+        }
 
       );
       return response.data;
