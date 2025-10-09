@@ -74,6 +74,7 @@ export default function BookMagicianPage() {
         "https://api.morphicarts.sa/api/contacts",
         payload,
         {
+          withCredentials: true,
           headers: {
             Accept: "application/json"
           }
