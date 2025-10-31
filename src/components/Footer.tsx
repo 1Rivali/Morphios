@@ -6,6 +6,7 @@ import {
   morphShape,
   logoAnimated,
 } from "@/core/constants/assets";
+import { homeDataAtom } from "@/store/global-store";
 import {
   AspectRatio,
   Box,
@@ -15,11 +16,13 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import { useAtomValue } from "jotai";
 import Lottie from "react-lottie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const navigate = useNavigate();
+  const homeData = useAtomValue(homeDataAtom)
   return (
     <Flex
       flexDir={{ base: "column", lg: "row" }}
@@ -46,11 +49,20 @@ const Footer = () => {
             height={"100%"}
           />
         </AspectRatio>
-        <HStack>
-          <Image src={icInstagram} />
-          <Image src={icYoutube} />
-          <Image src={icX} />
-        </HStack>
+        {
+          homeData && <HStack>
+            <Link to={homeData.instagram_link}>
+              <Image src={icInstagram} />
+            </Link>
+            <Link to={homeData.youtube_link}>
+              <Image src={icYoutube} />
+            </Link>
+            <Link to={homeData.x_link}>
+              <Image src={icX} />
+            </Link>
+          </HStack>
+        }
+
       </Box>
       <Box
         flex={6}
@@ -76,9 +88,21 @@ const Footer = () => {
             color={"white"}
             fontSize={{ base: "sm", lg: "md" }}
           >
-            Email - @morphic.arts
+            Email - {homeData?.email}
+          </Text>
+          <Text
+            p={"10px"}
+            ml={"10"}
+            background={"#272727"}
+            width={"fit-content"}
+            borderRadius={"10px"}
+            color={"white"}
+            fontSize={{ base: "sm", lg: "md" }}
+          >
+            Phone - {homeData?.phone_number}
           </Text>
         </Center>
+        <Text>{homeData?.location}</Text>
       </Box>
       <Image flex={1} src={morphShape} width={"20vh"} />
     </Flex>
