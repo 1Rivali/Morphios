@@ -6,6 +6,7 @@ import {
   useBreakpointValue,
   VStack,
   Text,
+  Grid,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { NavLinkItem } from "./NavLink";
@@ -41,7 +42,7 @@ export function NavBar() {
 
   return (
     <>
-      <HStack
+      <Grid
         position="fixed"
         top={0}
         left={0}
@@ -50,7 +51,8 @@ export function NavBar() {
         width="100%"
         px={6}
         zIndex={1000}
-        justifyContent="space-between"
+        templateColumns="1fr auto 1fr"
+        alignItems="center"
         // backgroundColor="transparent"
         background={scrolled ? "#000000" : "transparent"}
         backdropFilter={scrolled ? "saturate(180%) blur(10px)" : "none"}
@@ -68,24 +70,24 @@ export function NavBar() {
             />
           )}
         </Box>
+
         {!isMobile && (
-          <>
-            <HStack gap={6} color="white">
-              {/* <NavLinkItem to="/" label="Home" exact /> */}
-              <NavLinkItem to="/origin" label="The Origin" />
-              {/* <NavLinkItem to="/book-magician" label="Book a magician" /> */}
-              <NavLinkItem to="/performers" label="Our Performers" />
-            </HStack>
-          </>
+          <HStack gap={6} color="white" justifySelf="center" justify="center">
+            {/* <NavLinkItem to="/" label="Home" exact /> */}
+            <NavLinkItem to="/origin" label="The Origin" />
+            {/* <NavLinkItem to="/book-magician" label="Book a magician" /> */}
+            <NavLinkItem to="/performers" label="Our Performers" />
+          </HStack>
         )}
-        {!isMobile && (
-          <MorphButton
-            text="Book a magician"
-            onClick={() => navigate("/book-magician")}
-            width={"12%"}
-          />
-        )}
-        {isMobile && (
+
+        {!isMobile ? (
+          <Box justifySelf="end">
+            <MorphButton
+              text="Book a magician"
+              onClick={() => navigate("/book-magician")}
+            />
+          </Box>
+        ) : (
           <Image
             src={icMenu}
             cursor="pointer"
@@ -93,9 +95,10 @@ export function NavBar() {
             transform={isMenuOpen ? "rotate(90deg)" : "rotate(0deg)"}
             transition="opacity 0.3s ease, transform 0.3s ease"
             _hover={{ opacity: 0.8 }}
+            justifySelf="end"
           />
         )}
-      </HStack>
+      </Grid>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
