@@ -22,8 +22,9 @@ import {
 } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { ContactRequest } from "./types/BookMagician";
+import { postContacts } from "./services/BookMagicianRequests";
 
 const performers = createListCollection({
   items: [
@@ -39,50 +40,18 @@ const performers = createListCollection({
   ],
 });
 
-interface ContactFormData {
-  name: string;
-  phone: string;
-  email: string;
-  city: string;
-  performer: string;
-  description: string;
-}
-
 export default function BookMagicianPage() {
-  const [formData, setFormData] = useState<ContactFormData>({
+  const [formData, setFormData] = useState<ContactRequest>({
     name: "",
     phone: "",
     email: "",
     city: "",
     performer: "",
-    description: "",
+    message: "",
   });
 
   const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      // Map form data to match backend validation requirements
-      const payload = {
-        name: data.name,
-        email: data.email,
-        message: data.description, // Map description to message field
-        phone: data.phone,
-        city: data.city,
-        performer: data.performer,
-      };
-
-      const response = await axios.post(
-        "https://api.morphicarts.sa/api/contacts",
-        payload,
-        {
-          withCredentials: true,
-          headers: {
-            Accept: "application/json"
-          }
-        }
-
-      );
-      return response.data;
-    },
+    mutationFn: postContacts,
     onSuccess: () => {
       // Reset form on success
       setFormData({
@@ -91,7 +60,7 @@ export default function BookMagicianPage() {
         email: "",
         city: "",
         performer: "",
-        description: "",
+        message: "",
       });
       toast.success("Your message has been sent successfully!", {
         position: "top-right",
@@ -152,7 +121,7 @@ export default function BookMagicianPage() {
     },
   });
 
-  const handleInputChange = (field: keyof ContactFormData, value: string) => {
+  const handleInputChange = (field: keyof ContactRequest, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -187,7 +156,7 @@ export default function BookMagicianPage() {
       errors.push("Email must be less than 255 characters");
     }
 
-    if (!formData.description.trim()) {
+    if (!formData.message.trim()) {
       errors.push("The message field is required");
     }
 
@@ -386,10 +355,8 @@ export default function BookMagicianPage() {
                   backgroundColor={"#111111"}
                   placeholder="Share your vision, space, or the feeling you want to create"
                   height={"30vh"}
-                  value={formData.description}
-                  onChange={(e) =>
-                    handleInputChange("description", e.target.value)
-                  }
+                  value={formData.message}
+                  onChange={(e) => handleInputChange("message", e.target.value)}
                 />
               </Field.Root>
               <MorphButton

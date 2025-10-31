@@ -10,8 +10,10 @@ import { HomePage } from "./features/Home";
 import { OriginPage } from "./features/Origin";
 import ProductionHouse from "./features/ProductionHouse/ProductionHousePage";
 import { PerformersPage } from "./features/Performers";
+import usePageViewTracker from "./lib/hooks/usePageViewTracker";
 
 function App() {
+  usePageViewTracker();
   return (
     <Box>
       <ScrollToTop />
